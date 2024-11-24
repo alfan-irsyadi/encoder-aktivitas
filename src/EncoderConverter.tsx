@@ -9,7 +9,11 @@ const EncodingConverter = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [result, setResult] = useState('');
 
-  const kelas = {
+  interface ObjectLiteral {
+    [key: string]: string;
+  }
+
+  const kelas: ObjectLiteral = {
     "Medan Baru - Kelas 11 - L02": "24251321132L020",
     "Medan Baru - Kelas 09 - P01": "24251321132P010",
     "Medan Baru - Kelas Ronin - O01": "24251324132O010",
@@ -24,7 +28,7 @@ const EncodingConverter = () => {
     option.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const processInputs = (input1, input2) => {
+  const processInputs = (input1:string, input2:string) => {
     if (input1 && input2) {
       const base64Input1 = btoa(input1);
       const base64Input2 = btoa(kelas[input2]);
@@ -37,13 +41,13 @@ const EncodingConverter = () => {
     }
   };
 
-  const handleTextInput1Change = (e) => {
+  const handleTextInput1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setTextInput1(value);
     processInputs(value, selectedOption);
   };
 
-  const handleOptionSelect = (option) => {
+  const handleOptionSelect = (option:string) => {
     setSelectedOption(option);
     processInputs(textInput1, option);
   };
